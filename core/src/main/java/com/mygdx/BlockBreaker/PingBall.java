@@ -12,10 +12,10 @@ public class PingBall {
 	    private int size;
 	    private int xSpeed;
 	    private int ySpeed;
-	    private Color color = Color.WHITE;
+    private Color color = Color.WHITE;
 	    private boolean estaQuieto;
 
-	    public PingBall(int x, int y, int size, int xSpeed, int ySpeed, boolean iniciaQuieto) {
+    public PingBall(int x, int y, int size, int xSpeed, int ySpeed, boolean iniciaQuieto) {
 	        this.x = x;
 	        this.y = y;
 	        this.size = size;
@@ -56,8 +56,17 @@ public class PingBall {
 	    public void checkCollision(Paddle paddle) {
 	        if(collidesWith(paddle)){
 	            color = Color.GREEN;
+                int directionX = (int) Math.signum(xSpeed);
 	            ySpeed = -ySpeed;
-	        }
+
+                float relativeImpact = (float) (x - (paddle.getX() + paddle.getWidth() / 2)) / ((float) paddle.getWidth() / 2) * 1.1f;
+                if(xSpeed < 5){
+                    xSpeed += (int) (5 * relativeImpact);
+                }
+                else{
+                    xSpeed = (int) (directionX * Math.abs(relativeImpact * 9));
+                }
+                }
 	        else{
 	            color = Color.WHITE;
 	        }
