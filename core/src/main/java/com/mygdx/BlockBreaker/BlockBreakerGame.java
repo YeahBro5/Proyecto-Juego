@@ -20,7 +20,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	private ShapeRenderer shape;
 	private PingBall ball;
 	private Paddle pad;
-	private ArrayList<Block> blocks = new ArrayList<>();
+	private ArrayList<CommonBlock> blocks = new ArrayList<>();
 	private int vidas;
 	private int puntaje;
 	private int nivel;
@@ -37,7 +37,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 
 		    shape = new ShapeRenderer();
 		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 5, 7, true);
-		    pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
+		    pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,200,10);
 		    vidas = 3;
 		    puntaje = 0;
 		}
@@ -49,7 +49,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 		    for (int cont = 0; cont<filas; cont++ ) {
 		    	y -= blockHeight+10;
 		    	for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
-		            blocks.add(new Block(x, y, blockWidth, blockHeight));
+		            blocks.add(new CommonBlock(x, y, blockWidth, blockHeight));
 		        }
 		    }
 		}
@@ -84,6 +84,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        // verificar game over
 	        if (vidas<=0) {
 	        	vidas = 3;
+                puntaje = 0;
 	        	nivel = 1;
 	        	crearBloques(2+nivel);
 	        	//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
@@ -95,13 +96,13 @@ public class BlockBreakerGame extends ApplicationAdapter {
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
 	        }
 	        //dibujar bloques
-	        for (Block b : blocks) {
+	        for (CommonBlock b : blocks) {
 	            b.draw(shape);
 	            ball.checkCollision(b);
 	        }
 	        // actualizar estado de los bloques
 	        for (int i = 0; i < blocks.size(); i++) {
-	            Block b = blocks.get(i);
+	            CommonBlock b = blocks.get(i);
 	            if (b.destroyed) {
 	            	puntaje++;
 	                blocks.remove(b);

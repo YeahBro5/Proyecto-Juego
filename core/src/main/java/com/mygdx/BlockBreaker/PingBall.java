@@ -78,13 +78,13 @@ public class PingBall {
 	    	return intersectaX && intersectaY;
 	    }
 
-	    public void checkCollision(Block block) {
+	    public void checkCollision(CommonBlock block) {
 	        if(collidesWith(block)){
 	            ySpeed = - ySpeed;
-	            block.destroyed = true;
+	            block.destroy();
 	        }
 	    }
-	    private boolean collidesWith(Block bb) {
+	    private boolean collidesWith(CommonBlock bb) {
 
 	    	boolean intersectaX = (bb.x + bb.width >= x-size) && (bb.x <= x+size);
 	        boolean intersectaY = (bb.y + bb.height >= y-size) && (bb.y <= y+size);
