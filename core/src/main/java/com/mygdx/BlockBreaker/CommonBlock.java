@@ -1,13 +1,10 @@
 package com.mygdx.BlockBreaker;
 
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-
 import java.util.Random;
-
 import com.badlogic.gdx.graphics.Color;
 
 public class CommonBlock extends Block {
-
 
     public CommonBlock(int x, int y, int width, int height) {
         this.x = x;

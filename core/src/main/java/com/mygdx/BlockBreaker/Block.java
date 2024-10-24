@@ -8,7 +8,7 @@ public abstract class Block {
     Color cc;
     boolean destroyed;
 
-    public void draw(ShapeRenderer shape){
+    public void draw(ShapeRenderer shape) {
         shape.setColor(cc);
         shape.rect(x, y, width, height);
     }

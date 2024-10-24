@@ -1,8 +1,6 @@
 package com.mygdx.BlockBreaker;
 
 import java.util.ArrayList;
-
-
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -37,22 +35,24 @@ public class BlockBreakerGame extends ApplicationAdapter {
 
 		    shape = new ShapeRenderer();
 		    ball = new PingBall(Gdx.graphics.getWidth()/2-10, 41, 10, 5, 7, true);
-		    pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,200,10);
+		    pad = new Paddle(Gdx.graphics.getWidth()/2-50,40,100,10);
 		    vidas = 3;
 		    puntaje = 0;
 		}
+
 		public void crearBloques(int filas) {
 			blocks.clear();
 			int blockWidth = 70;
 		    int blockHeight = 26;
 		    int y = Gdx.graphics.getHeight();
-		    for (int cont = 0; cont<filas; cont++ ) {
+		    for (int cont = 0 ; cont < filas ; cont++ ) {
 		    	y -= blockHeight+10;
-		    	for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
+		    	for (int x = 5 ; x < Gdx.graphics.getWidth() ; x += blockWidth + 10) {
 		            blocks.add(new CommonBlock(x, y, blockWidth, blockHeight));
 		        }
 		    }
 		}
+
 		public void dibujaTextos() {
 			//actualizar matrices de la cámara
 			camera.update();
@@ -70,36 +70,41 @@ public class BlockBreakerGame extends ApplicationAdapter {
 			Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 	        shape.begin(ShapeRenderer.ShapeType.Filled);
 	        pad.draw(shape);
+
 	        // monitorear inicio del juego
 	        if (ball.estaQuieto()) {
 	        	ball.setXY(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11);
 	        	if (Gdx.input.isKeyPressed(Input.Keys.SPACE)) ball.setEstaQuieto(false);
-	        }else ball.update();
+	        } else ball.update();
+
 	        //verificar si se fue la bola x abajo
-	        if (ball.getY()<0) {
+	        if (ball.getY() < 0) {
 	        	vidas--;
 	        	//nivel = 1;
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
 	        }
+
 	        // verificar game over
-	        if (vidas<=0) {
+	        if (vidas <= 0) {
 	        	vidas = 3;
-                puntaje = 0;
 	        	nivel = 1;
 	        	crearBloques(2+nivel);
 	        	//ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
 	        }
+
 	        // verificar si el nivel se terminó
-	        if (blocks.size()==0) {
+	        if (blocks.isEmpty()) {
 	        	nivel++;
 	        	crearBloques(2+nivel);
 	        	ball = new PingBall(pad.getX()+pad.getWidth()/2-5, pad.getY()+pad.getHeight()+11, 10, 5, 7, true);
 	        }
+
 	        //dibujar bloques
 	        for (CommonBlock b : blocks) {
 	            b.draw(shape);
 	            ball.checkCollision(b);
 	        }
+
 	        // actualizar estado de los bloques
 	        for (int i = 0; i < blocks.size(); i++) {
 	            CommonBlock b = blocks.get(i);
