@@ -3,7 +3,7 @@ package com.mygdx.BlockBreaker;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public abstract class Block {
+public abstract class Block implements Collidable {
     protected int x, y, width, height;
     protected Color color;
     protected boolean destroyed;

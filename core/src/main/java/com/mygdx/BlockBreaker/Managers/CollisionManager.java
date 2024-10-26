@@ -10,17 +10,7 @@ public class CollisionManager {
 
     public static void checkCollision(PingBall ball, Paddle paddle) {
         if (collidesWith(ball, paddle)) {
-            ball.setColor(GREEN);
-            int directionX = (int) Math.signum(ball.getXSpeed());
-            ball.reverseYSpeed();
-
-            float relativeImpact = (float) (ball.getX() - (paddle.getX() + paddle.getWidth() / 2))
-                / ((float) paddle.getWidth() / 2) * 1.1f;
-            if(ball.getXSpeed() < 5) {
-                ball.setXSpeed(ball.getXSpeed() + (int) (5 * relativeImpact));
-            } else {
-                ball.setXSpeed((int) (directionX * Math.abs(relativeImpact * 9)));
-            }
+            ball.onCollision(paddle);
         } else {
             ball.setColor(WHITE);
         }
@@ -28,8 +18,8 @@ public class CollisionManager {
 
     public static void checkCollision(PingBall ball, CommonBlock block) {
         if (collidesWith(ball, block)) {
-            ball.reverseYSpeed();
-            block.destroy();
+            ball.handleBlockCollision(block);
+            block.onCollision(ball);
         }
     }
 

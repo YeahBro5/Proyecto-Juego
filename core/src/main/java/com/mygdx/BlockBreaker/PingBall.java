@@ -5,7 +5,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.BlockBreaker.Managers.CollisionManager;
 
-public class PingBall {
+import static com.badlogic.gdx.graphics.Color.GREEN;
+
+public class PingBall implements Collidable{
     private int x, y, size, xSpeed, ySpeed;
     private Color color = Color.WHITE;
     private boolean estaQuieto;
@@ -28,7 +30,7 @@ public class PingBall {
     public int getYSpeed() { return ySpeed; }
     public void setXSpeed(int speed) { this.xSpeed = speed; }
     public void setYSpeed(int speed) { this.ySpeed = speed; }
-    public void reverseYSpeed() { this.ySpeed = -ySpeed; }
+    private void reverseYSpeed() { this.ySpeed = -ySpeed; }
     public int getSize() { return size; }
     public void setColor(Color color) { this.color = color; }
 
@@ -45,10 +47,32 @@ public class PingBall {
             xSpeed = -xSpeed;
         }
         if (y + size > Gdx.graphics.getHeight()) {
-            ySpeed = -ySpeed;
+            reverseYSpeed();
         }
     }
+    public void onCollision(Object other) {
+        if (other instanceof Paddle) {
+            handlePaddleCollision((Paddle) other);
+        } else if (other instanceof CommonBlock) {
+            handleBlockCollision((CommonBlock) other);
+        }
+    }
+    private void handlePaddleCollision(Paddle paddle){
+        setColor(GREEN);
+        int directionX = (int) Math.signum(getXSpeed());
+        reverseYSpeed();
 
+        float relativeImpact = (float) (getX() - (paddle.getX() + paddle.getWidth() / 2))
+            / ((float) paddle.getWidth() / 2) * 1.1f;
+        if(getXSpeed() < 5) {
+            setXSpeed(getXSpeed() + (int) (5 * relativeImpact));
+        } else {
+            setXSpeed((int) (directionX * Math.abs(relativeImpact * 9)));
+        }
+    }
+    public void handleBlockCollision(Block block){
+        reverseYSpeed();
+    }
     public void checkCollision(Paddle paddle) {
         CollisionManager.checkCollision(this, paddle);
     }
