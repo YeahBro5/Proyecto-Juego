@@ -11,7 +11,7 @@ public class GameManager {
     private PingBall ball;
     private Paddle paddle;
     private ArrayList<Block> blocks;
-    private int lives;
+    private int lives = 3;
     private int score;
     private int level;
 
@@ -28,8 +28,6 @@ public class GameManager {
 
     public void initializeLevel(int level) {
         this.level = level;
-        this.lives = 3;
-        this.score = 0;
         this.ball = new PingBall(Gdx.graphics.getWidth() / 2 - 10, 41, 10, 5, 7, true);
         this.paddle = new Paddle(Gdx.graphics.getWidth() / 2 - 50, 40, 100, 10);
         createBlocks(2 + level);
