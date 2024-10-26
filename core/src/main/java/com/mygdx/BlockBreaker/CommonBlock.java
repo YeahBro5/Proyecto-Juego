@@ -1,23 +1,22 @@
 package com.mygdx.BlockBreaker;
 
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
-import java.util.Random;
 import com.badlogic.gdx.graphics.Color;
+import java.util.Random;
 
 public class CommonBlock extends Block {
 
     public CommonBlock(int x, int y, int width, int height) {
-        this.x = x;
-        this.y = y;
-        this.width = width;
-        this.height = height;
-        destroyed = false;
-        Random r = new Random(x+y);
-
-       cc = new Color(0.1f+r.nextFloat(1), r.nextFloat(1), r.nextFloat(1), 10);
-
+        super(x, y, width, height, generateRandomColor(x, y));
     }
+
+    @Override
     public void destroy() {
-        destroyed = true;
+        this.destroyed = true;
+    }
+
+    // Metodo estático para generar un color aleatorio basado en la posición
+    private static Color generateRandomColor(int x, int y) {
+        Random r = new Random(x + y);
+        return new Color(0.1f + r.nextFloat() * 0.9f, r.nextFloat(), r.nextFloat(), 1f);
     }
 }

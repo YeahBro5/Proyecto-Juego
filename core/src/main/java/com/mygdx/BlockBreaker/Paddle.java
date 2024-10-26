@@ -28,12 +28,9 @@ public class Paddle {
         int x2 = x; //= Gdx.input.getX();
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) x2 = x-10;
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) x2 = x+10;
-       // y = Gdx.graphics.getHeight() - Gdx.input.getY();
         if (x2 > 0 && x2+width < Gdx.graphics.getWidth()) {
             x = x2;
         }
         shape.rect(x, y, width, height);
     }
-
-
 }
