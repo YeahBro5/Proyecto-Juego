@@ -32,7 +32,6 @@ public class PingBall implements Collidable{
     public int getYSpeed() { return ySpeed; }
     public void setXSpeed(int speed) { this.xSpeed = speed; }
     public void setYSpeed(int speed) { this.ySpeed = speed; }
-    private void reverseYSpeed() { this.ySpeed = -ySpeed; }
     public int getSize() { return size; }
     public void setColor(Color color) { this.color = color; }
 
@@ -49,9 +48,10 @@ public class PingBall implements Collidable{
             xSpeed = -xSpeed;
         }
         if (y + size > Gdx.graphics.getHeight()) {
-            reverseYSpeed();
+            this.ySpeed = -ySpeed;
         }
     }
+
     public void onCollision(Object other) {
         if (other instanceof Paddle) {
             handlePaddleCollision((Paddle) other);
@@ -59,10 +59,11 @@ public class PingBall implements Collidable{
             handleBlockCollision((CommonBlock) other);
         }
     }
+
     private void handlePaddleCollision(Paddle paddle){
         setColor(GREEN);
         int directionX = (int) Math.signum(getXSpeed());
-        reverseYSpeed();
+        this.ySpeed = -ySpeed;
 
         float relativeImpact = (float) (getX() - (paddle.getX() + paddle.getWidth() / 2))
             / ((float) paddle.getWidth() / 2) * 1.1f;
@@ -72,14 +73,33 @@ public class PingBall implements Collidable{
             setXSpeed((int) (directionX * Math.abs(relativeImpact * 9)));
         }
     }
+
     public void handleBlockCollision(Block block){
-        reverseYSpeed();
+        if (lateralCollision(block)) {
+            xSpeed = -xSpeed;
+            x = (x < block.getX()) ? block.getX() - size : block.getX() + block.getWidth() + size;
+        } else {
+            ySpeed = -ySpeed;
+            y = (y < block.getY()) ? block.getY() - size : block.getY() + block.getHeight() + size;
+        }
     }
+
     public void checkCollision(Paddle paddle) {
         CollisionManager.checkCollision(this, paddle);
     }
 
     public void checkCollision(Block block) {
         CollisionManager.checkCollision(this, block);
+    }
+
+    private boolean lateralCollision(Block block) {
+        // Calcula las distancias entre el centro de la pelota y cada borde del bloque
+        float distLeft = Math.abs(x - (block.getX() - size));
+        float distRight = Math.abs(x - (block.getX() + block.getWidth() + size));
+        float distTop = Math.abs(y - (block.getY() + block.getHeight() + size));
+        float distBottom = Math.abs(y - (block.getY() - size));
+
+        // La colisión es lateral si las distancias a los lados son menores que las distancias a los bordes superior e inferior
+        return distLeft < distTop && distLeft < distBottom || distRight < distTop && distRight < distBottom;
     }
 }
