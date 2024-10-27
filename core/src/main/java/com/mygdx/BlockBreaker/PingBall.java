@@ -3,6 +3,8 @@ package com.mygdx.BlockBreaker;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.BlockBreaker.Blocks.Block;
+import com.mygdx.BlockBreaker.Blocks.CommonBlock;
 import com.mygdx.BlockBreaker.Managers.CollisionManager;
 
 import static com.badlogic.gdx.graphics.Color.GREEN;
@@ -77,7 +79,7 @@ public class PingBall implements Collidable{
         CollisionManager.checkCollision(this, paddle);
     }
 
-    public void checkCollision(CommonBlock block) {
+    public void checkCollision(Block block) {
         CollisionManager.checkCollision(this, block);
     }
 }

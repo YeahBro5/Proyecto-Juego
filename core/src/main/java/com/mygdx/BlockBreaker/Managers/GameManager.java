@@ -5,6 +5,8 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.BlockBreaker.*;
+import com.mygdx.BlockBreaker.Blocks.Block;
+import com.mygdx.BlockBreaker.Factories.LevelFactory;
 
 public class GameManager {
     private static GameManager instance;
@@ -30,23 +32,11 @@ public class GameManager {
         this.level = level;
         this.ball = new PingBall(Gdx.graphics.getWidth() / 2 - 10, 41, 10, 5, 7, true);
         this.paddle = new Paddle(Gdx.graphics.getWidth() / 2 - 50, 40, 100, 10);
-        createBlocks(2 + level);
-    }
-
-    private void createBlocks(int rows) {
-        blocks.clear();
-        int blockWidth = 70;
-        int blockHeight = 26;
-        int y = Gdx.graphics.getHeight();
-        for (int i = 0; i < rows; i++) {
-            y -= blockHeight + 10;
-            for (int x = 5; x < Gdx.graphics.getWidth(); x += blockWidth + 10) {
-                blocks.add(BlockFactory.createBlock(1, x, y, blockWidth, blockHeight));
-            }
-        }
+        this.blocks = LevelFactory.createLevel(level); // Usar LevelFactory para crear los bloques
     }
 
     public void updateGameState() {
+
         // Si la bola está quieta, verificar si el jugador la lanza
         if (ball.estaQuieto()) {
             ball.setXY(paddle.getX() + paddle.getWidth() / 2 - 5, paddle.getY() + paddle.getHeight() + 11);
@@ -63,6 +53,8 @@ public class GameManager {
         }
 
         // Verificar si se completó el nivel
+        // for (Block block : blocks)
+        // if (block instanceof CommonBlock) ?????
         if (blocks.isEmpty()) {
             level++;
             initializeLevel(level);
@@ -82,7 +74,7 @@ public class GameManager {
 
         // Colisiones entre la bola y los bloques
         for (Block block : blocks) {
-            ball.checkCollision((CommonBlock) block);
+            ball.checkCollision(block);
         }
 
         // Remover bloques destruidos y actualizar el puntaje

@@ -1,4 +1,3 @@
-///*
 package com.mygdx.BlockBreaker;
 
 import com.badlogic.gdx.ApplicationAdapter;

@@ -1,6 +1,6 @@
 package com.mygdx.BlockBreaker.Managers;
 
-import com.mygdx.BlockBreaker.CommonBlock;
+import com.mygdx.BlockBreaker.Blocks.Block;
 import com.mygdx.BlockBreaker.Paddle;
 import com.mygdx.BlockBreaker.PingBall;
 
@@ -16,7 +16,7 @@ public class CollisionManager {
         }
     }
 
-    public static void checkCollision(PingBall ball, CommonBlock block) {
+    public static void checkCollision(PingBall ball, Block block) {
         if (collidesWith(ball, block)) {
             ball.handleBlockCollision(block);
             block.onCollision(ball);
@@ -31,7 +31,7 @@ public class CollisionManager {
         return intersectX && intersectY;
     }
 
-    private static boolean collidesWith(PingBall ball, CommonBlock block) {
+    private static boolean collidesWith(PingBall ball, Block block) {
         boolean intersectX = (block.getX() + block.getWidth() >= ball.getX() - ball.getSize())
             && (block.getX() <= ball.getX() + ball.getSize());
         boolean intersectY = (block.getY() + block.getHeight() >= ball.getY() - ball.getSize())

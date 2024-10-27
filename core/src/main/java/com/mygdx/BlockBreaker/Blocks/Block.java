@@ -1,7 +1,8 @@
-package com.mygdx.BlockBreaker;
+package com.mygdx.BlockBreaker.Blocks;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.BlockBreaker.Collidable;
 
 public abstract class Block implements Collidable {
     protected int x, y, width, height;
@@ -28,7 +29,6 @@ public abstract class Block implements Collidable {
     public abstract void destroy();
 
     // Métodos getters y setters para los atributos
-
     public int getX() { return x; }
     public void setX(int x) { this.x = x; }
 

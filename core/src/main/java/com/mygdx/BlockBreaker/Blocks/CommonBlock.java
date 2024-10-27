@@ -1,4 +1,4 @@
-package com.mygdx.BlockBreaker;
+package com.mygdx.BlockBreaker.Blocks;
 
 import com.badlogic.gdx.graphics.Color;
 import java.util.Random;
@@ -6,7 +6,7 @@ import java.util.Random;
 public class CommonBlock extends Block {
 
     public CommonBlock(int x, int y, int width, int height) {
-        super(x, y, width, height, generateRandomColor(x, y));
+        super(x, y, width, height, Color.WHITE);
     }
 
     @Override
@@ -17,6 +17,7 @@ public class CommonBlock extends Block {
         Random r = new Random(x + y);
         return new Color(0.1f + r.nextFloat() * 0.9f, r.nextFloat(), r.nextFloat(), 1f);
     }
+
     public void onCollision(Object other){
         destroy();
     }
