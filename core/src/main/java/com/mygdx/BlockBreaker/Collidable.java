@@ -1,6 +1,10 @@
 package com.mygdx.BlockBreaker;
 
 public interface Collidable {
-    void onCollision(Object other);
+    void onCollision(Collidable other);
+    int getX();
+    int getY();
+    int getWidth();
+    int getHeight();
 }
 

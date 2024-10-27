@@ -15,7 +15,7 @@ public class BlockBreakerGame extends ApplicationAdapter {
     @Override
     public void create() {
         gameManager = GameManager.getInstance();
-        gameManager.initializeLevel(1);
+        gameManager.initializeLevel(3);
         uiManager = new UIManager(gameManager);
         shape = new ShapeRenderer();
     }

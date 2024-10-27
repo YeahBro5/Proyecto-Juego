@@ -8,6 +8,7 @@ import com.mygdx.BlockBreaker.Blocks.CommonBlock;
 import com.mygdx.BlockBreaker.Managers.CollisionManager;
 
 import static com.badlogic.gdx.graphics.Color.GREEN;
+import static com.badlogic.gdx.graphics.Color.WHITE;
 
 public class PingBall implements Collidable{
     private int x, y, size, xSpeed, ySpeed;
@@ -34,7 +35,8 @@ public class PingBall implements Collidable{
     public void setYSpeed(int speed) { this.ySpeed = speed; }
     public int getSize() { return size; }
     public void setColor(Color color) { this.color = color; }
-
+    public int getWidth(){return size;}
+    public int getHeight(){return size;}
     public void draw(ShapeRenderer shape) {
         shape.setColor(color);
         shape.circle(x, y, size);
@@ -52,16 +54,17 @@ public class PingBall implements Collidable{
         }
     }
 
-    public void onCollision(Object other) {
+    public void onCollision(Collidable other) {
+        setColor(GREEN);
         if (other instanceof Paddle) {
             handlePaddleCollision((Paddle) other);
-        } else if (other instanceof CommonBlock) {
-            handleBlockCollision((CommonBlock) other);
+        } else if (other instanceof Block) {
+            handleBlockCollision((Block) other);
         }
+        setColor(WHITE);
     }
 
     private void handlePaddleCollision(Paddle paddle){
-        setColor(GREEN);
         int directionX = (int) Math.signum(getXSpeed());
         this.ySpeed = -ySpeed;
 
@@ -74,7 +77,7 @@ public class PingBall implements Collidable{
         }
     }
 
-    public void handleBlockCollision(Block block){
+    private void handleBlockCollision(Block block){
         if (lateralCollision(block)) {
             xSpeed = -xSpeed;
             x = (x < block.getX()) ? block.getX() - size : block.getX() + block.getWidth() + size;

@@ -1,6 +1,8 @@
 package com.mygdx.BlockBreaker.Blocks;
 
 import com.badlogic.gdx.graphics.Color;
+import com.mygdx.BlockBreaker.Collidable;
+
 import java.util.Random;
 
 public class CommonBlock extends Block {
@@ -18,7 +20,7 @@ public class CommonBlock extends Block {
         return new Color(0.1f + r.nextFloat() * 0.9f, r.nextFloat(), r.nextFloat(), 1f);
     }
 
-    public void onCollision(Object other){
+    public void onCollision(Collidable other){
         destroy();
     }
 }
