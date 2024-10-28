@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.Gdx;
 import com.mygdx.BlockBreaker.*;
 import com.mygdx.BlockBreaker.Blocks.Block;
+import com.mygdx.BlockBreaker.Blocks.IndestructibleBlock;
 import com.mygdx.BlockBreaker.Factories.LevelFactory;
 
 public class GameManager {
@@ -52,10 +53,12 @@ public class GameManager {
             if (lives <= 0) resetGame();
         }
 
-        // Verificar si se completó el nivel
-        // for (Block block : blocks)
-        // if (block instanceof CommonBlock) ?????
-        if (blocks.isEmpty()) {
+        // Verificar si se completó el nivel (solo considerando bloques destructibles)
+        boolean allDestructibleBlocksDestroyed = blocks.stream()
+            .filter(block -> !(block instanceof IndestructibleBlock))  // Excluye bloques indestructibles
+            .allMatch(Block::isDestroyed);
+
+        if (allDestructibleBlocksDestroyed) {
             level++;
             initializeLevel(level);
         }

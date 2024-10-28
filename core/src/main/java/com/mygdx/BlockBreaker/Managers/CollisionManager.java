@@ -1,11 +1,6 @@
 package com.mygdx.BlockBreaker.Managers;
 
-import com.mygdx.BlockBreaker.Blocks.Block;
 import com.mygdx.BlockBreaker.Collidable;
-import com.mygdx.BlockBreaker.Paddle;
-import com.mygdx.BlockBreaker.PingBall;
-
-import static com.badlogic.gdx.graphics.Color.*;
 
 public class CollisionManager {
 

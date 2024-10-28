@@ -28,6 +28,7 @@ public abstract class Block implements Collidable {
     // Clase Abstracta
     public abstract void destroy();
     public abstract void onCollision(Collidable other);
+
     // Métodos getters y setters para los atributos
     public int getX() { return x; }
     public void setX(int x) { this.x = x; }

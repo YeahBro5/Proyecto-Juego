@@ -20,7 +20,7 @@ public class CommonBlock extends Block {
         return new Color(0.1f + r.nextFloat() * 0.9f, r.nextFloat(), r.nextFloat(), 1f);
     }
 
-    public void onCollision(Collidable other){
+    public void onCollision(Collidable other) {
         destroy();
     }
 }

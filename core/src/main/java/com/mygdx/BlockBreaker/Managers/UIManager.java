@@ -6,9 +6,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.Gdx;
 
 public class UIManager {
-    private SpriteBatch batch;
-    private BitmapFont font;
-    private GameManager gameManager;
+    private final SpriteBatch batch;
+    private final BitmapFont font;
+    private final GameManager gameManager;
 
     public UIManager(GameManager gameManager) {
         this.gameManager = gameManager;
