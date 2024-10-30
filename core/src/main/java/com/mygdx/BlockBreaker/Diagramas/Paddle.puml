@@ -1,0 +1,13 @@
+@startuml
+class Paddle implements Collidable {
+    - x: int
+    - y: int
+    - width: int
+    - height: int
+    + onCollision(other: Collidable): void
+    + getX(): int
+    + getY(): int
+    + getWidth(): int
+    + getHeight(): int
+}
+@enduml

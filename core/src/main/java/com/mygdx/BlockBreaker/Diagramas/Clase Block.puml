@@ -1,0 +1,16 @@
+@startuml
+abstract class Block {
+    - x: int
+    - y: int
+    - width: int
+    - height: int
+    - color: Color
+    - destroyed: boolean
+    + Block(int x, int y, int width, int height, Color color)
+    + draw(shape: ShapeRenderer): void
+    + destroy(): void
+    + onCollision(other: Collidable): void
+    + isDestroyed(): boolean
+}
+@enduml
+

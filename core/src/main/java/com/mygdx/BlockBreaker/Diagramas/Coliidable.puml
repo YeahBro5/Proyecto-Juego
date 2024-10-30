@@ -1,0 +1,9 @@
+@startuml
+interface Collidable {
+    + onCollision(other: Collidable): void
+    + getX(): int
+    + getY(): int
+    + getWidth(): int
+    + getHeight(): int
+}
+@enduml

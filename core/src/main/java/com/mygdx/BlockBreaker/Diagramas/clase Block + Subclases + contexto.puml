@@ -1,0 +1,46 @@
+@startuml
+abstract class Block {
+    - x: int
+    - y: int
+    - width: int
+    - height: int
+    - color: Color
+    - destroyed: boolean
+    + Block(int x, int y, int width, int height, Color color)
+    + draw(shape: ShapeRenderer): void
+    + destroy(): void
+    + onCollision(other: Collidable): void
+    + isDestroyed(): boolean
+}
+
+class CommonBlock extends Block {
+    + CommonBlock(int x, int y, int width, int height)
+    + destroy(): void
+    + onCollision(other: Collidable): void
+    - generateRandomColor(int x, int y): Color
+}
+
+class IndestructibleBlock extends Block {
+    + IndestructibleBlock(int x, int y, int width, int height)
+    + destroy(): void
+    + onCollision(other: Collidable): void
+}
+
+class GameManager {
+    - blocks: ArrayList<Block>
+    - ball: PingBall
+    - paddle: Paddle
+    + initializeLevel(level: int): void
+    + updateGameState(): void
+    + resetGame(): void
+    + checkCollisions(ball: PingBall): void
+    + drawGameObjects(shape: ShapeRenderer): void
+    + getScore(): int
+    + getLives(): int
+    + getLevel(): int
+}
+
+Block <|-- CommonBlock
+Block <|-- IndestructibleBlock
+GameManager --> Block : "1..*" gestiona
+@enduml

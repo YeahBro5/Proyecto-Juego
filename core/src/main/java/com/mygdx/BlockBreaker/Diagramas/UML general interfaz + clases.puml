@@ -1,0 +1,45 @@
+@startuml
+interface Collidable {
+    + onCollision(other: Collidable): void
+    + getX(): int
+    + getY(): int
+    + getWidth(): int
+    + getHeight(): int
+}
+
+class PingBall implements Collidable {
+    - x: int
+    - y: int
+    - size: int
+    - xSpeed: int
+    - ySpeed: int
+    - color: Color
+    + onCollision(other: Collidable): void
+    + getX(): int
+    + getY(): int
+    + getWidth(): int
+    + getHeight(): int
+}
+
+class Paddle implements Collidable {
+    - x: int
+    - y: int
+    - width: int
+    - height: int
+    + onCollision(other: Collidable): void
+    + getX(): int
+    + getY(): int
+    + getWidth(): int
+    + getHeight(): int
+}
+
+class CollisionManager {
+    + checkCollision(object1: Collidable, object2: Collidable): void
+    - collidesWith(object1: Collidable, object2: Collidable): boolean
+}
+
+Collidable <|.. PingBall
+Collidable <|.. Paddle
+CollisionManager --> Collidable : uses
+@enduml
+

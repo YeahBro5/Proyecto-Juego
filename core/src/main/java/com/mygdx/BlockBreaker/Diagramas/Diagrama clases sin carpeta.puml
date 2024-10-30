@@ -1,0 +1,141 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+interface Collidable {
+    +onCollision(other: Collidable): void
+    +getX(): int
+    +getY(): int
+    +getWidth(): int
+    +getHeight(): int
+}
+
+class BlockBreakerGame extends ApplicationAdapter {
+    -gameManager: GameManager
+    -uiManager: UIManager
+    -shape: ShapeRenderer
+    +create(): void
+    +render(): void
+    +dispose(): void
+}
+
+class PingBall implements Collidable {
+    -x: int
+    -y: int
+    -size: int
+    -xSpeed: int
+    -ySpeed: int
+    -color: Color
+    -estaQuieto: boolean
+    +estaQuieto(): boolean
+    +setEstaQuieto(bb: boolean): void
+    +setXY(x: int, y: int): void
+    +getX(): int
+    +getY(): int
+    +getXSpeed(): int
+    +getYSpeed(): int
+    +setXSpeed(speed: int): void
+    +setYSpeed(speed: int): void
+    +getSize(): int
+    +setColor(color: Color): void
+    +draw(shape: ShapeRenderer): void
+    +update(): void
+    +checkCollision(paddle: Paddle): void
+    +checkCollision(block: Block): void
+}
+
+class Paddle implements Collidable {
+    -x: int
+    -y: int
+    -width: int
+    -height: int
+    +draw(shape: ShapeRenderer): void
+    +onCollision(object: Collidable): void
+    +getX(): int
+    +getY(): int
+    +getWidth(): int
+    +getHeight(): int
+}
+
+abstract class Block implements Collidable {
+    -x: int
+    -y: int
+    -width: int
+    -height: int
+    -color: Color
+    -destroyed: boolean
+    +draw(shape: ShapeRenderer): void
+    +destroy(): void
+    +onCollision(other: Collidable): void
+    +getX(): int
+    +getY(): int
+    +getWidth(): int
+    +getHeight(): int
+    +getColor(): Color
+    +isDestroyed(): boolean
+}
+
+class CommonBlock extends Block {
+    +destroy(): void
+    +onCollision(other: Collidable): void
+}
+
+class IndestructibleBlock extends Block {
+    +destroy(): void
+    +onCollision(other: Collidable): void
+}
+
+class GameManager {
+    -ball: PingBall
+    -paddle: Paddle
+    -blocks: ArrayList<Block>
+    -lives: int
+    -score: int
+    -level: int
+    +initializeLevel(level: int): void
+    +updateGameState(): void
+    +resetGame(): void
+    +checkCollisions(): void
+    +drawGameObjects(shape: ShapeRenderer): void
+    +getScore(): int
+    +getLives(): int
+    +getLevel(): int
+}
+
+class CollisionManager {
+    +checkCollision(ball: Collidable, other: Collidable): void
+    -collidesWith(ball: Collidable, other: Collidable): boolean
+}
+
+class UIManager {
+    -batch: SpriteBatch
+    -font: BitmapFont
+    -gameManager: GameManager
+    +renderUI(): void
+    +dispose(): void
+}
+
+class BlockFactory {
+    +createBlock(type: int, x: int, y: int, width: int, height: int): Block
+}
+
+class LevelFactory {
+    +createLevel(level: int): ArrayList<Block>
+}
+
+BlockBreakerGame "1" --> "1" GameManager : gestiona >
+BlockBreakerGame "1" --> "1" UIManager : gestiona >
+GameManager "1" --> "1" PingBall : contiene >
+GameManager "1" --> "1" Paddle : contiene >
+GameManager "1" --> "*" Block : gestiona >
+GameManager "1" --> "1" LevelFactory : usa >
+PingBall "1" --> "1" CollisionManager : revisa colisiones con >
+Paddle "1" --> "1" CollisionManager : revisa colisiones con >
+UIManager "1" --> "1" GameManager : accede >
+BlockFactory "1" --> "1..*" Block : crea >
+LevelFactory "1" --> "1..*" Block : crea >
+Block "1" --> "1" Collidable : implementa >
+PingBall "1" --> "1" Collidable : implementa >
+Paddle "1" --> "1" Collidable : implementa >
+
+@enduml
+

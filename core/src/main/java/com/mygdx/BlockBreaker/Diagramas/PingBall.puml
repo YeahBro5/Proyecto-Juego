@@ -1,0 +1,16 @@
+@startuml
+class PingBall implements Collidable {
+    - x: int
+    - y: int
+    - size: int
+    - xSpeed: int
+    - ySpeed: int
+    - color: Color
+    + onCollision(other: Collidable): void
+    + getX(): int
+    + getY(): int
+    + getWidth(): int
+    + getHeight(): int
+}
+@enduml
+

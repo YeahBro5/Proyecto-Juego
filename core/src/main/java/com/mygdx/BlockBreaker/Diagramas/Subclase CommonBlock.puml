@@ -1,0 +1,9 @@
+@startuml
+class CommonBlock extends Block {
+    + CommonBlock(int x, int y, int width, int height)
+    + destroy(): void
+    + onCollision(other: Collidable): void
+    - generateRandomColor(int x, int y): Color
+}
+@enduml
+

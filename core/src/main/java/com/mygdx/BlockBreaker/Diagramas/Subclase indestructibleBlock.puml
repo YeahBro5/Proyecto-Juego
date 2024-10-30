@@ -1,0 +1,7 @@
+@startuml
+class IndestructibleBlock extends Block {
+    + IndestructibleBlock(int x, int y, int width, int height)
+    + destroy(): void
+    + onCollision(other: Collidable): void
+}
+@enduml
