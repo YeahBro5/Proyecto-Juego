@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class LevelFactory {
 
-    // Mtodo para crear bloques según el nivel
+    // Metodo para crear bloques según el nivel
     public static ArrayList<Block> createLevel(int level) {
         ArrayList<Block> blocks = new ArrayList<>();
         int blockWidth = 70;
@@ -15,7 +15,7 @@ public class LevelFactory {
 
         // Nivel 1
         if (level == 1) {
-            for (int i = 0 ; i < 3 ; i++) {
+            for (int i = 0 ; i < 2 ; i++) {
                 y -= blockHeight + 10;
                 for (int x = 5 ; x < Gdx.graphics.getWidth() ; x += blockWidth + 10) {
                     blocks.add(BlockFactory.createBlock(1, x, y, blockWidth, blockHeight));
@@ -24,7 +24,7 @@ public class LevelFactory {
         }
         // Nivel 2
         else if (level == 2) {
-            for (int i = 0 ; i < 4 ; i++) {
+            for (int i = 0 ; i < 3 ; i++) {
                 y -= blockHeight + 10;
                 for (int x = 5 ; x < Gdx.graphics.getWidth() ; x += blockWidth + 10) {
                     blocks.add(BlockFactory.createBlock(1, x, y, blockWidth, blockHeight));
@@ -46,11 +46,26 @@ public class LevelFactory {
             }
         }
 
+        // Nivel 4
+        else if (level == 4) {
+            for (int i = 0 ; i < 5 ; i++) {
+                y -= blockHeight + 10;
+                for (int x = 5 ; x < Gdx.graphics.getWidth() ; x += blockWidth + 10) {
+                    System.out.println(x + " " + y + "\n");
+                    if ((x < 405 || x > 415) && y == Gdx.graphics.getHeight()-180) {
+                        blocks.add(BlockFactory.createBlock(2, x, y, blockWidth, blockHeight));
+                    } else {
+                        blocks.add(BlockFactory.createBlock(1, x, y, blockWidth, blockHeight));
+                    }
+                }
+            }
+        }
+
         else {
             for (int i = 0 ; i < 2+level ; i++) {
                 y -= blockHeight + 10;
                 for (int x = 5 ; x < Gdx.graphics.getWidth() ; x += blockWidth + 10) {
-                    System.out.println(x + " " + y + "\n");
+                    //System.out.println(x + " " + y + "\n");
                     blocks.add(BlockFactory.createBlock(1, x, y, blockWidth, blockHeight));
                 }
             }

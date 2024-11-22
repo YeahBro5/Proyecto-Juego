@@ -1,5 +1,6 @@
 package com.mygdx.BlockBreaker.Managers;
 
+import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.Color;
@@ -20,6 +21,9 @@ public class UIManager {
 
     public void renderUI() {
         batch.begin();
+
+        Texture fondo = TextureManager.getInstance().getTextura("fondo-1");
+        batch.draw(fondo, 0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
 
         // Dibujar el puntaje, nivel y vidas
         font.draw(batch, "Puntos: " + gameManager.getScore(), 10, 25);

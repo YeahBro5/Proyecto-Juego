@@ -6,6 +6,7 @@ import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.mygdx.BlockBreaker.BlockBreakerGame;
+import com.mygdx.BlockBreaker.Managers.AudioManager;
 import com.mygdx.BlockBreaker.Managers.GameManager;
 import com.mygdx.BlockBreaker.Managers.UIManager;
 
@@ -26,6 +27,7 @@ public class StartGameScreen extends ScreenAdapter {
         gameManager.initializeLevel(1);
         uiManager = new UIManager(gameManager);
         shape = new ShapeRenderer();
+        AudioManager.getInstance().reproducirMusica("musica-1", true);
     }
 
     @Override
@@ -40,16 +42,15 @@ public class StartGameScreen extends ScreenAdapter {
             return;
         }
 
-
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         gameManager.updateGameState();
         gameManager.checkCollisions();
 
-        // Dibujar elementos del juego
-        gameManager.drawGameObjects(shape);
-
         // Dibujar interfaz de usuario
         uiManager.renderUI();
+
+        // Dibujar elementos del juego
+        gameManager.drawGameObjects(shape);
     }
 
     private void renderPauseMenu() {

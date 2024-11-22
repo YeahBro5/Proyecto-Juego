@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.BlockBreaker.Managers.AudioManager;
 
 public class Paddle implements Collidable{
     private int x = 20;
@@ -34,5 +35,7 @@ public class Paddle implements Collidable{
         shape.rect(x, y, width, height);
     }
 
-    public void onCollision(Collidable object) {}
+    public void onCollision(Collidable object) {
+        AudioManager.getInstance().reproducirSonido("pong");
+    }
 }

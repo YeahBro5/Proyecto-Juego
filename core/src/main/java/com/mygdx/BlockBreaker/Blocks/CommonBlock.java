@@ -2,6 +2,7 @@ package com.mygdx.BlockBreaker.Blocks;
 
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.BlockBreaker.Collidable;
+import com.mygdx.BlockBreaker.Managers.AudioManager;
 
 import java.util.Random;
 
@@ -22,5 +23,6 @@ public class CommonBlock extends Block {
 
     public void onCollision(Collidable other) {
         destroy();
+        AudioManager.getInstance().reproducirSonido("snapping");
     }
 }

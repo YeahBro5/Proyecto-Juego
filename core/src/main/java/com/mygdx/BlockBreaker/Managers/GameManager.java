@@ -8,6 +8,7 @@ import com.mygdx.BlockBreaker.*;
 import com.mygdx.BlockBreaker.Blocks.Block;
 import com.mygdx.BlockBreaker.Blocks.IndestructibleBlock;
 import com.mygdx.BlockBreaker.Factories.LevelFactory;
+import com.mygdx.BlockBreaker.Managers.AudioManager;
 
 public class GameManager {
     private static GameManager instance;
@@ -49,6 +50,7 @@ public class GameManager {
         // Verificar si la bola cayó al fondo de la pantalla
         if (ball.getY() < 0) {
             lives--;
+            AudioManager.getInstance().reproducirSonido("damage");
             ball = new PingBall(paddle.getX() + paddle.getWidth() / 2 - 5, paddle.getY() + paddle.getHeight() + 11, 10, 5, 7, true);
             if (lives <= 0) resetGame();
         }

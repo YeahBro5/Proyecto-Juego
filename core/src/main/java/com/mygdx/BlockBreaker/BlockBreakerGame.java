@@ -1,11 +1,10 @@
 package com.mygdx.BlockBreaker;
 
-import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.mygdx.BlockBreaker.Managers.AudioManager;
 import com.mygdx.BlockBreaker.Managers.GameManager;
+import com.mygdx.BlockBreaker.Managers.TextureManager;
 import com.mygdx.BlockBreaker.Managers.UIManager;
 import com.mygdx.BlockBreaker.Screens.MainMenuScreen;
 
@@ -16,11 +15,24 @@ public class BlockBreakerGame extends Game {
 
     @Override
     public void create() {
-        //gameManager = GameManager.getInstance();
-        //gameManager.initializeLevel(1);
-        //uiManager = new UIManager(gameManager);
-        //shape = new ShapeRenderer();
+        cargarAssets();
         setScreen(new MainMenuScreen(this)); // Inicia con el menú principal
+    }
+
+    private void cargarAssets() {
+        TextureManager gestorTexturas = TextureManager.getInstance();
+        AudioManager gestorAudio = AudioManager.getInstance();
+
+        //gestorTexturas.cargarTextura("fondo-1", "Texturas/si1.png");
+        gestorTexturas.cargarTextura("fondo-1", "Texturas/si2.png");
+
+        gestorAudio.cargarMusica("musica-1", "Musicas/musica-1.mp3");
+        gestorAudio.cargarSonido("pong", "Efectos/pong.mp3");
+        gestorAudio.cargarSonido("damage", "Efectos/damage.mp3");
+        gestorAudio.cargarSonido("snapping", "Efectos/snapping.mp3");
+        gestorAudio.cargarSonido("metal", "Efectos/metal.mp3");
+        gestorAudio.cargarSonido("shovel", "Efectos/shovel.mp3");
+        gestorAudio.cargarSonido("wood", "Efectos/wood.mp3");
     }
 
     @Override

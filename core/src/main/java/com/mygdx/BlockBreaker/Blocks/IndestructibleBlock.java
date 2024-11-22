@@ -2,6 +2,7 @@ package com.mygdx.BlockBreaker.Blocks;
 
 import com.badlogic.gdx.graphics.Color;
 import com.mygdx.BlockBreaker.Collidable;
+import com.mygdx.BlockBreaker.Managers.AudioManager;
 
 import java.util.Random;
 
@@ -14,5 +15,8 @@ public class IndestructibleBlock extends Block {
     @Override
     public void destroy() {this.destroyed = true;}
 
-    public void onCollision(Collidable other) { }
+    public void onCollision(Collidable other) {
+        //AudioManager.getInstance().reproducirSonido("metal");
+        AudioManager.getInstance().reproducirSonido("shovel");
+    }
 }
