@@ -50,18 +50,11 @@ public class StartGameScreen extends ScreenAdapter {
 
         // Dibujar interfaz de usuario
         uiManager.renderUI();
-
-        // Actualizar y renderizar el juego
-
-        //shape.begin(ShapeRenderer.ShapeType.Filled);
-        //shape.circle(100, 100, 50); // Ejemplo de renderizado
-        //shape.end();
     }
 
     private void renderPauseMenu() {
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
         System.out.println("Menú de Pausa");
-        // Aquí podrías integrar un menú de pausa con botones.
     }
 
     @Override

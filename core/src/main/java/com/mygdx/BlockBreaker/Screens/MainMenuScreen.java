@@ -1,19 +1,17 @@
 package com.mygdx.BlockBreaker.Screens;
 
-import com.badlogic.gdx.ScreenAdapter; // Para extender las clases de pantalla.
+import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage; // Maneja los elementos de la interfaz.
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton; // Botones con texto.
-import com.badlogic.gdx.scenes.scene2d.ui.Table; // Organiza elementos en pantalla.
-import com.badlogic.gdx.scenes.scene2d.ui.Skin; // Define los estilos visuales.
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener; // Maneja clics en botones.
-import com.badlogic.gdx.utils.viewport.ScreenViewport; // Vista para el Stage.
-import com.badlogic.gdx.Gdx; // Acceso global a recursos y utilidades.
-import com.badlogic.gdx.graphics.GL20; // Para limpiar la pantalla.
-import com.badlogic.gdx.graphics.g2d.BitmapFont; // Fuente para textos.
-import com.badlogic.gdx.graphics.Color; // Colores para botones y textos.
-import com.badlogic.gdx.Input; // Para detectar teclas.
-import com.badlogic.gdx.InputProcessor; // Si gestionas entradas manualmente.
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.GL20;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.Color;
 import com.mygdx.BlockBreaker.*;
 
 public class MainMenuScreen extends ScreenAdapter {
@@ -46,9 +44,8 @@ public class MainMenuScreen extends ScreenAdapter {
 
         // Crear botones con sus acciones
         createButton("Iniciar Juego", new StartGameAction(game), table, skin);
-        //createButton("Ajustes", new OpenSettingsAction(), table, skin);
-        //createButton("Créditos", new ShowCreditsAction(), table, skin);
-       // createButton("Salir", new ExitGameAction(), table, skin);
+        createButton("Ajustes", new SettingsAction(game), table, skin);
+        createButton("Salir", new ExitGameAction(), table, skin);
     }
 
     private void createButton(String text, MenuAction action, Table table, Skin skin) {

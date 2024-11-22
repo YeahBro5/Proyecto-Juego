@@ -25,11 +25,11 @@ public class BlockBreakerGame extends Game {
 
     @Override
     public void render() {
-        super.render();
+        super.render(); // Se llama al render de la pantalla activa !!
     }
 
     @Override
     public void dispose() {
-        super.dispose();
+        super.dispose(); // Se llama al dispose de la pantalla activa !!
     }
 }
