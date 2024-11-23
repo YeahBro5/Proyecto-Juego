@@ -115,8 +115,10 @@ public class GameManager {
     public int getLevel() {
         return level;
     }
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public void dispose() {
     }
 }
-

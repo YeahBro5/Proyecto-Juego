@@ -18,8 +18,6 @@ import com.mygdx.BlockBreaker.BlockBreakerGame;
 import com.mygdx.BlockBreaker.Managers.AudioManager;
 import com.mygdx.BlockBreaker.Screens.MenuAction;
 import com.mygdx.BlockBreaker.Screens.Settings.SettingsAction;
-import com.mygdx.BlockBreaker.Screens.Settings.SettingsScreen;
-import com.mygdx.BlockBreaker.Screens.StartGame.StartGameAction;
 
 public class VolumenScreen extends ScreenAdapter {
     private BitmapFont font;
@@ -90,6 +88,14 @@ public class VolumenScreen extends ScreenAdapter {
         float textX = ((Gdx.graphics.getWidth() - textWidth) / 2) + 80;
         float textY = ((Gdx.graphics.getHeight() / 2)) + 50; //
         font.draw(batch, volumenTexto, textX, textY);
+
+        String instrucciones = "Subir volumen: Flecha arriba\nBajar volumen: Flecha abajo";
+        float instruccionesX = 665;
+        float instruccionesY = 65;
+
+        font.draw(batch, instrucciones, instruccionesX, instruccionesY);
+
+        //
         batch.end();
 
         // Dibujar el Stage

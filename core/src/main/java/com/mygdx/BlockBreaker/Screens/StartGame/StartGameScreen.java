@@ -20,8 +20,11 @@ import com.mygdx.BlockBreaker.Managers.AudioManager;
 import com.mygdx.BlockBreaker.Managers.GameManager;
 import com.mygdx.BlockBreaker.Managers.UIManager;
 import com.mygdx.BlockBreaker.Screens.MenuAction;
-import com.mygdx.BlockBreaker.Screens.Settings.SettingsAction;
 import com.mygdx.BlockBreaker.Screens.Settings.VolverMenuPrincipal.VolverMenuPrincipalAction;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 
 public class StartGameScreen extends ScreenAdapter {
     private GameManager gameManager;
@@ -39,9 +42,12 @@ public class StartGameScreen extends ScreenAdapter {
 
     @Override
     public void show() {
-        gameManager = GameManager.getInstance();
-        gameManager.initializeLevel(1);
-        uiManager = new UIManager(gameManager);
+        obtenerGuardado();
+        //gameManager = GameManager.getInstance();
+        //gameManager.initializeLevel(0);
+        //gameManager.setScore(100);
+        //uiManager = new UIManager(gameManager);
+
         shape = new ShapeRenderer();
         font = new BitmapFont();
         batch = new SpriteBatch();
@@ -63,7 +69,7 @@ public class StartGameScreen extends ScreenAdapter {
         table.setFillParent(true);
         stage.addActor(table);
 
-        createButton("Volver al menu principal", new VolverMenuPrincipalAction(game) , table, skin);
+        createButton("Volver al menu principal", new VolverMenuPrincipalAction(game, true) , table, skin);
     }
 
     @Override
@@ -110,6 +116,30 @@ public class StartGameScreen extends ScreenAdapter {
             }
         });
         table.add(button).pad(10).row();
+    }
+    public void obtenerGuardado()
+    {
+
+        String levelSTR = "";
+        String scoreSTR = "";
+        try (BufferedReader reader = new BufferedReader(new FileReader("assets/Guardado/Guardado.csv"))){
+            String linea;
+           while ((linea = reader.readLine()) != null) {
+               String[] campos = linea.split(";");
+               levelSTR = campos[0];
+               scoreSTR = campos[1];
+           }
+        } catch (IOException e){
+            throw new RuntimeException(e);
+        }
+
+        int level = Integer.parseInt(levelSTR);
+        int score = Integer.parseInt(scoreSTR);
+
+        gameManager = GameManager.getInstance();
+        gameManager.initializeLevel(level);
+        gameManager.setScore(score);
+        uiManager = new UIManager(gameManager);
     }
 
     @Override

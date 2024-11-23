@@ -15,6 +15,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.mygdx.BlockBreaker.*;
 import com.mygdx.BlockBreaker.Managers.AudioManager;
 import com.mygdx.BlockBreaker.Screens.Exit.ExitGameAction;
+import com.mygdx.BlockBreaker.Screens.ResetProgress.ResetProgressAction;
 import com.mygdx.BlockBreaker.Screens.Settings.SettingsAction;
 import com.mygdx.BlockBreaker.Screens.StartGame.StartGameAction;
 
@@ -49,8 +50,9 @@ public class MainMenuScreen extends ScreenAdapter {
 
         // Botones
         createButton("Iniciar Juego", new StartGameAction(game), table, skin);
+        createButton("Reiniciar Progreso", new ResetProgressAction(game), table, skin);
         createButton("Ajustes", new SettingsAction(game), table, skin);
-        createButton("Salir", new ExitGameAction(), table, skin);
+        createButton("Salir", new ExitGameAction(game), table, skin);
     }
 
     private void createButton(String text, MenuAction action, Table table, Skin skin) {
