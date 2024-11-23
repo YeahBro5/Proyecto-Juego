@@ -13,6 +13,7 @@ public class AudioManager {
     private Music musicaActual;
     private final Map<String, Music> musicas;
     private final Map<String, Sound> sonidos;
+    private float volumenGlobal = 0.20f;
 
     private AudioManager() {
         musicas = new HashMap<>();
@@ -46,14 +47,14 @@ public class AudioManager {
         if (musicaActual != null) {
             musicaActual.setLooping(loop);
             musicaActual.play();
-            musicaActual.setVolume(.2f);
+            musicaActual.setVolume(volumenGlobal);
         }
     }
 
     public void reproducirSonido(String key) {
         Sound sonido = sonidos.get(key);
         if (sonido != null) {
-            sonido.play(.12f);
+            sonido.play(volumenGlobal);
         }
     }
 
@@ -70,4 +71,25 @@ public class AudioManager {
         musicas.clear();
         sonidos.clear();
     }
+
+    public void aumentarVolumen(float incremento) {
+        setVolumenGlobal(volumenGlobal + incremento);
+    }
+
+    public void disminuirVolumen(float decremento) {
+        setVolumenGlobal(volumenGlobal - decremento);
+    }
+
+    public void setVolumenGlobal(float volumen) {
+        this.volumenGlobal = Math.max(0, Math.min(1, volumen));
+        if (musicaActual != null) {
+            musicaActual.setVolume(volumenGlobal);
+        }
+    }
+
+    public float getVolumenGlobal() {
+        return volumenGlobal;
+    }
+
+
 }

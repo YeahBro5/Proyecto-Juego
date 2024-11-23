@@ -1,30 +1,29 @@
-package com.mygdx.BlockBreaker.Screens;
+package com.mygdx.BlockBreaker.Screens.Settings;
 
-import com.badlogic.gdx.ScreenAdapter;
-import com.badlogic.gdx.scenes.scene2d.InputEvent;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
-import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
-import com.badlogic.gdx.utils.viewport.ScreenViewport;
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.ScreenAdapter;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.Color;
-import com.mygdx.BlockBreaker.*;
-import com.mygdx.BlockBreaker.Screens.Exit.ExitGameAction;
-import com.mygdx.BlockBreaker.Screens.Settings.SettingsAction;
-import com.mygdx.BlockBreaker.Screens.StartGame.StartGameAction;
+import com.badlogic.gdx.scenes.scene2d.InputEvent;
+import com.badlogic.gdx.scenes.scene2d.Stage;
+import com.badlogic.gdx.scenes.scene2d.ui.Skin;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
+import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.BlockBreaker.BlockBreakerGame;
+import com.mygdx.BlockBreaker.Screens.MenuAction;
+import com.mygdx.BlockBreaker.Screens.Settings.SoundVolume.VolumenAction;
+import com.mygdx.BlockBreaker.Screens.Settings.VolverMenuPrincipal.VolverMenuPrincipalAction;
 
-public class MainMenuScreen extends ScreenAdapter {
+public class SettingsScreen extends ScreenAdapter {
     private final BlockBreakerGame game;
     private Stage stage;
 
-    public MainMenuScreen(BlockBreakerGame game) {
+    public SettingsScreen(BlockBreakerGame game) {
         this.game = game;
     }
-
     @Override
     public void show() {
         stage = new Stage(new ScreenViewport());
@@ -45,10 +44,9 @@ public class MainMenuScreen extends ScreenAdapter {
         table.setFillParent(true);
         stage.addActor(table);
 
-        // Botones
-        createButton("Iniciar Juego", new StartGameAction(game), table, skin);
-        createButton("Ajustes", new SettingsAction(game), table, skin);
-        createButton("Salir", new ExitGameAction(), table, skin);
+        // Crear botones
+        createButton("Volumen", new VolumenAction(game), table, skin);
+        createButton("Volver al menu principal", new VolverMenuPrincipalAction(game), table, skin);
     }
 
     private void createButton(String text, MenuAction action, Table table, Skin skin) {

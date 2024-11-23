@@ -1,6 +1,7 @@
-package com.mygdx.BlockBreaker.Screens;
+package com.mygdx.BlockBreaker.Screens.StartGame;
 
 import com.mygdx.BlockBreaker.BlockBreakerGame;
+import com.mygdx.BlockBreaker.Screens.MenuAction;
 
 
 public class StartGameAction implements MenuAction {
