@@ -24,9 +24,11 @@ public class BlockBreakerGame extends Game {
         AudioManager gestorAudio = AudioManager.getInstance();
 
         //gestorTexturas.cargarTextura("fondo-1", "Texturas/si1.png");
-        gestorTexturas.cargarTextura("fondo-1", "Texturas/si2.png");
+        gestorTexturas.cargarTextura("fondo-1", "Texturas/Galaxy-Green.png");
 
         gestorAudio.cargarMusica("musica-1", "Musicas/musica-1.mp3");
+        gestorAudio.cargarMusica("musica-2", "Musicas/musica-2.mp3");
+
         gestorAudio.cargarSonido("pong", "Efectos/pong.mp3");
         gestorAudio.cargarSonido("damage", "Efectos/damage.mp3");
         gestorAudio.cargarSonido("snapping", "Efectos/snapping.mp3");

@@ -45,7 +45,7 @@ public class StartGameScreen extends ScreenAdapter {
         shape = new ShapeRenderer();
         font = new BitmapFont();
         batch = new SpriteBatch();
-        AudioManager.getInstance().reproducirMusica("musica-1", true);
+        AudioManager.getInstance().reproducirMusica("musica-2", true);
 
         // Para el menu de pausa.
         stage = new Stage(new ScreenViewport());
@@ -118,7 +118,5 @@ public class StartGameScreen extends ScreenAdapter {
         gameManager.dispose();
         uiManager.dispose();
     }
-
-
 }
 

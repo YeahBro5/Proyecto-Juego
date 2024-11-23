@@ -8,7 +8,6 @@ import com.mygdx.BlockBreaker.*;
 import com.mygdx.BlockBreaker.Blocks.Block;
 import com.mygdx.BlockBreaker.Blocks.IndestructibleBlock;
 import com.mygdx.BlockBreaker.Factories.LevelFactory;
-import com.mygdx.BlockBreaker.Managers.AudioManager;
 
 public class GameManager {
     private static GameManager instance;

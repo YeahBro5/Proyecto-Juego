@@ -58,6 +58,12 @@ public class AudioManager {
         }
     }
 
+    public void detenerMusica() {
+        if (musicaActual != null) {
+            musicaActual.stop();
+        }
+    }
+
     public void dispose() {
         if (musicaActual != null) {
             musicaActual.dispose();
