@@ -108,11 +108,9 @@ public class GameManager {
     public int getScore() {
         return score;
     }
-
     public int getLives() {
         return lives;
     }
-
     public int getLevel() {
         return level;
     }
@@ -122,7 +120,6 @@ public class GameManager {
     public void setLives(int lives) {
         this.lives = lives;
     }
-
     public void dispose() {
     }
 }

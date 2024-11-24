@@ -9,14 +9,13 @@ import com.mygdx.BlockBreaker.Managers.CollisionManager;
 import static com.badlogic.gdx.graphics.Color.GREEN;
 import static com.badlogic.gdx.graphics.Color.WHITE;
 
-public class PingBall implements Collidable{
-    private int x, y, size, xSpeed, ySpeed;
+public class PingBall extends GameObject implements Collidable{
+    private int size, xSpeed, ySpeed;
     private Color color = Color.WHITE;
     private boolean estaQuieto;
 
     public PingBall(int x, int y, int size, int xSpeed, int ySpeed, boolean iniciaQuieto) {
-        this.x = x;
-        this.y = y;
+        setPosicion(x, y);
         this.size = size;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
@@ -25,9 +24,7 @@ public class PingBall implements Collidable{
 
     public boolean estaQuieto() { return estaQuieto; }
     public void setEstaQuieto(boolean bb) { estaQuieto = bb; }
-    public void setXY(int x, int y) { this.x = x; this.y = y; }
-    public int getX() { return x; }
-    public int getY() { return y; }
+    public void setXY(int x, int y) { this.posX = x; this.posY = y; }
     public int getXSpeed() { return xSpeed; }
     public int getYSpeed() { return ySpeed; }
     public void setXSpeed(int speed) { this.xSpeed = speed; }
@@ -36,19 +33,21 @@ public class PingBall implements Collidable{
     public void setColor(Color color) { this.color = color; }
     public int getWidth(){return size;}
     public int getHeight(){return size;}
+
     public void draw(ShapeRenderer shape) {
         shape.setColor(color);
-        shape.circle(x, y, size);
+        shape.circle(posX, posY, size);
     }
 
+    @Override
     public void update() {
         if (estaQuieto) return;
-        x += xSpeed;
-        y += ySpeed;
-        if (x - size < 0 || x + size > Gdx.graphics.getWidth()) {
+        posX += xSpeed;
+        posY += ySpeed;
+        if (posX - size < 0 || posX + size > Gdx.graphics.getWidth()) {
             xSpeed = -xSpeed;
         }
-        if (y + size > Gdx.graphics.getHeight()) {
+        if (posY + size > Gdx.graphics.getHeight()) {
             this.ySpeed = -ySpeed;
         }
     }
@@ -87,19 +86,19 @@ public class PingBall implements Collidable{
     private void handleBlockCollision(Block block){
         if (lateralCollision(block)) {
             xSpeed = -xSpeed;
-            x = (x < block.getX()) ? block.getX() - size : block.getX() + block.getWidth() + size;
+            posX = (posX < block.getX()) ? block.getX() - size : block.getX() + block.getWidth() + size;
         } else {
             ySpeed = -ySpeed;
-            y = (y < block.getY()) ? block.getY() - size : block.getY() + block.getHeight() + size;
+            posY = (posY < block.getY()) ? block.getY() - size : block.getY() + block.getHeight() + size;
         }
     }
 
     private boolean lateralCollision(Block block) {
         // Calcula las distancias entre el centro de la pelota y cada borde del bloque
-        float distLeft = Math.abs(x - (block.getX() - size));
-        float distRight = Math.abs(x - (block.getX() + block.getWidth() + size));
-        float distTop = Math.abs(y - (block.getY() + block.getHeight() + size));
-        float distBottom = Math.abs(y - (block.getY() - size));
+        float distLeft = Math.abs(posX - (block.getX() - size));
+        float distRight = Math.abs(posX - (block.getX() + block.getWidth() + size));
+        float distTop = Math.abs(posY - (block.getY() + block.getHeight() + size));
+        float distBottom = Math.abs(posY - (block.getY() - size));
 
         // La colisión es lateral si las distancias a los lados son menores que las distancias a los bordes superior e inferior
         return distLeft < distTop && distLeft < distBottom || distRight < distTop && distRight < distBottom;
