@@ -18,7 +18,8 @@ public class ResetProgressAction implements MenuAction {
     {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter("assets/Guardado/Guardado.csv"))) {
 
-            writer.write("1;0");
+            writer.write("1;0;3");
+
 
 
 

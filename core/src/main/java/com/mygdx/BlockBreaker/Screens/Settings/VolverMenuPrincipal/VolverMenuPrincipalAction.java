@@ -30,7 +30,8 @@ public class VolverMenuPrincipalAction implements MenuAction {
                 GameManager gameManager = GameManager.getInstance();
                 int nivel = gameManager.getLevel();
                 int score = gameManager.getScore();
-                writer.write(nivel+ ";" + score);
+                int lives = gameManager.getLives();
+                writer.write(nivel+ ";" + score + ";" + lives);
 
 
 

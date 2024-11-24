@@ -61,6 +61,7 @@ public class GameManager {
 
         if (allDestructibleBlocksDestroyed) {
             level++;
+          //  this.lives = 3;
             initializeLevel(level);
         }
     }
@@ -117,6 +118,9 @@ public class GameManager {
     }
     public void setScore(int score) {
         this.score = score;
+    }
+    public void setLives(int lives) {
+        this.lives = lives;
     }
 
     public void dispose() {

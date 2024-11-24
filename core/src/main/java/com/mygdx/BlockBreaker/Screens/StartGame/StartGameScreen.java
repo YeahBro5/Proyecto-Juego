@@ -122,12 +122,14 @@ public class StartGameScreen extends ScreenAdapter {
 
         String levelSTR = "";
         String scoreSTR = "";
+        String livesSTR = "";
         try (BufferedReader reader = new BufferedReader(new FileReader("assets/Guardado/Guardado.csv"))){
             String linea;
            while ((linea = reader.readLine()) != null) {
                String[] campos = linea.split(";");
                levelSTR = campos[0];
                scoreSTR = campos[1];
+               livesSTR = campos[2];
            }
         } catch (IOException e){
             throw new RuntimeException(e);
@@ -135,10 +137,12 @@ public class StartGameScreen extends ScreenAdapter {
 
         int level = Integer.parseInt(levelSTR);
         int score = Integer.parseInt(scoreSTR);
+        int lives = Integer.parseInt(livesSTR);
 
         gameManager = GameManager.getInstance();
         gameManager.initializeLevel(level);
         gameManager.setScore(score);
+        gameManager.setLives(lives);
         uiManager = new UIManager(gameManager);
     }
 
