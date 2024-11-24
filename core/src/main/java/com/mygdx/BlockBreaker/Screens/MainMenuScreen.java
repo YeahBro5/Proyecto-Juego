@@ -20,11 +20,29 @@ import com.mygdx.BlockBreaker.Screens.Settings.SettingsAction;
 import com.mygdx.BlockBreaker.Screens.StartGame.StartGameAction;
 
 public class MainMenuScreen extends ScreenAdapter {
+
     private final BlockBreakerGame game;
     private Stage stage;
 
-    public MainMenuScreen(BlockBreakerGame game) {
+    // Atributo privado de tipo Strategy (MenuAction)
+    private MenuAction currentAction;
+
+    // Constructor que recibe un tipo Strategy y lo asigna
+    public MainMenuScreen(BlockBreakerGame game, MenuAction initialAction) {
         this.game = game;
+        this.currentAction = initialAction;
+    }
+
+    // Metodo encargado de asignar la nueva estrategia
+    public void setStrategy(MenuAction newAction) {
+        this.currentAction = newAction;
+    }
+
+    // Metodo que utiliza el metodo de la interfaz Strategy (Menu Action)
+    public void executeCurrentAction() {
+        if (currentAction != null) {
+            currentAction.execute();
+        }
     }
 
     @Override
@@ -60,7 +78,9 @@ public class MainMenuScreen extends ScreenAdapter {
         button.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                action.execute();
+                // Usar la estrategia asignada
+                setStrategy(action);
+                executeCurrentAction();
             }
         });
         table.add(button).pad(10).row();
@@ -74,7 +94,8 @@ public class MainMenuScreen extends ScreenAdapter {
     }
 
     @Override
-    public void hide() {
+    public void dispose() {
         stage.dispose();
     }
 }
+

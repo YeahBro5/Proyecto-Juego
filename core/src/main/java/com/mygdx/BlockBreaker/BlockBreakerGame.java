@@ -7,16 +7,20 @@ import com.mygdx.BlockBreaker.Managers.GameManager;
 import com.mygdx.BlockBreaker.Managers.TextureManager;
 import com.mygdx.BlockBreaker.Managers.UIManager;
 import com.mygdx.BlockBreaker.Screens.MainMenuScreen;
+import com.mygdx.BlockBreaker.Screens.MenuAction;
+import com.mygdx.BlockBreaker.Screens.StartGame.StartGameAction;
 
 public class BlockBreakerGame extends Game {
     private GameManager gameManager;
     private UIManager uiManager;
     private ShapeRenderer shape;
+    MenuAction initialAction;
 
     @Override
     public void create() {
         cargarAssets();
-        setScreen(new MainMenuScreen(this)); // Inicia con el menú principal
+        this.initialAction = new StartGameAction(this);
+        setScreen(new MainMenuScreen(this, initialAction)); // Inicia con el menú principal
     }
 
     private void cargarAssets() {

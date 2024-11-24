@@ -4,6 +4,7 @@ import com.mygdx.BlockBreaker.BlockBreakerGame;
 import com.mygdx.BlockBreaker.Managers.GameManager;
 import com.mygdx.BlockBreaker.Screens.MainMenuScreen;
 import com.mygdx.BlockBreaker.Screens.MenuAction;
+import com.mygdx.BlockBreaker.Screens.StartGame.StartGameAction;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
@@ -12,14 +13,17 @@ import java.io.IOException;
 public class VolverMenuPrincipalAction implements MenuAction {
     private final BlockBreakerGame game;
     boolean pauseMenu;
+    MenuAction Action;
 
     public VolverMenuPrincipalAction(BlockBreakerGame game) {
         this.game = game;
         this.pauseMenu = false;
+        this.Action = new StartGameAction(game);
     }
     public VolverMenuPrincipalAction(BlockBreakerGame game, boolean pauseMenu) {
         this.game = game;
         this.pauseMenu = pauseMenu;
+        this.Action = new StartGameAction(game);
     }
 
     public void execute()
@@ -40,6 +44,6 @@ public class VolverMenuPrincipalAction implements MenuAction {
             }
         }
 
-        game.setScreen(new MainMenuScreen(game));
+        game.setScreen(new MainMenuScreen(game, Action));
     }
 }
