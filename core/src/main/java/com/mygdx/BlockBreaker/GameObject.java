@@ -57,6 +57,6 @@ public abstract class GameObject {
     }
 
     public void draw(SpriteBatch batch) { batch.draw(textura, posX, posY, width, height); }
-    public void update() {}
+    public abstract void update();
 
 }

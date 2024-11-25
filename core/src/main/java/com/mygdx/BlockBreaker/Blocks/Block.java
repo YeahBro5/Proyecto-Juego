@@ -30,6 +30,7 @@ public abstract class Block extends GameObject implements Collidable {
     public Color getColor() { return color; }
     public void setColor(Color color) { this.color = color; }
 
+    public void update(){};
     public boolean isDestroyed() { return destroyed; }
     public void setDestroyed(boolean destroyed) { this.destroyed = destroyed; }
 }
